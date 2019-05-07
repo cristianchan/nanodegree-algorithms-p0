@@ -1,0 +1,5 @@
+Task0 : O(1)
+Task1 : O(t + c) calls + texts
+Task2: O(n) calls
+Task3: O(2n) calls
+Task4: O(n) calls
