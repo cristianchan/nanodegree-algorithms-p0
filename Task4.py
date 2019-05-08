@@ -13,17 +13,14 @@ with open('calls.csv', 'r') as f:
     calls = list(reader)
     
 
-telemarketers = list()
+telemarketers = set()
 
 for call in calls:
-    if call[0].startswith('140'):
-      if call[0] not in telemarketers:
-         telemarketers.append(call[0])
-    
-telemarketers.sort()
+    if call[0] not in texts and call[0] not in [row[1] for row in calls]:
+        telemarketers.add(call[0])
 
 print("These numbers could be telemarketers: ")
-for number in telemarketers:
+for number in sorted(telemarketers):
     print(number)
 
 """
