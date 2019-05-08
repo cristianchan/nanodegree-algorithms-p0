@@ -4,6 +4,7 @@ It's ok if you don't understand how to read files
 """
 import csv
 import operator
+from collections import defaultdict
 
 with open('texts.csv', 'r') as f:
     reader = csv.reader(f)
@@ -13,20 +14,14 @@ with open('calls.csv', 'r') as f:
     reader = csv.reader(f)
     calls = list(reader)
 
-phone_numbers = dict()
+call_duration = defaultdict(int)
 
 for call in calls:
-    if call[0] in phone_numbers:
-        phone_numbers[call[0]] += int(call[3])
-    else:
-        phone_numbers[call[0]] = int(call[3])
-    
-    if call[0] in phone_numbers:
-        phone_numbers[call[0]] += int(call[3])
-    else:
-        phone_numbers[call[0]] = int(call[3])
+    call_duration[call[0]] += int(call[3])
+    call_duration[call[1]] += int(call[3])
 
-max_phone_call = max(phone_numbers.items(), key=operator.itemgetter(1))
+
+max_phone_call = max(call_duration.items(), key=operator.itemgetter(1))
 
 print('%s spent the longest time, %s seconds, on the phone during September 2016.'%(max_phone_call[0],max_phone_call[1]))
 
