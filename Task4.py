@@ -15,8 +15,12 @@ with open('calls.csv', 'r') as f:
 
 telemarketers = set()
 
+texts_from_numbers = [row[0] for row in texts]
+texts_to_numbers = [row[0] for row in texts]
+calls_to_numbers = [row[1] for row in calls]
+
 for call in calls:
-    if call[0] not in texts and call[0] not in [row[1] for row in calls]:
+    if call[0] not in texts_from_numbers and call[0] not in texts_to_numbers and call[0] not in calls_to_numbers:
         telemarketers.add(call[0])
 
 print("These numbers could be telemarketers: ")
