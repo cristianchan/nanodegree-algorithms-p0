@@ -14,10 +14,12 @@ with open('calls.csv', 'r') as f:
 
 prefixes_bangalore_called = list()
 
+calls_from_bangalor = 0
 calls_bangalor = 0
 
 for call in calls:
     if call[0].startswith('(080)'):
+      calls_from_bangalor += 1
       if(call[1].startswith('(0')):
         prefix = call[1][0:call[1].find(")")+1]
         if(prefix not in prefixes_bangalore_called):
@@ -38,7 +40,7 @@ print('The numbers called by people in Bangalore have codes:')
 for prefix in prefixes_bangalore_called:
   print(prefix)
 
-porcentage = round((calls_bangalor / len(calls)) * 100, 2)
+porcentage = round((calls_bangalor / calls_from_bangalor) * 100, 2)
 
 print('%s percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.'%(porcentage))
 
